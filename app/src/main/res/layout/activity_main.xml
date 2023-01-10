@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/ltp_time"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:layout_weight="1">
+
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="48dp"
+            app:materialIcon="clock"
+            app:materialIconColor="#5000"
+            android:scaleType="center"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_gravity="bottom"
+            android:text="Select Time"
+            android:gravity="center"
+            android:textColor="#5000"
+            android:textSize="24sp"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/ltp_date"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="?android:attr/selectableItemBackground">
+
+        <net.steamcrafted.materialiconlib.MaterialIconView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="48dp"
+            app:materialIcon="calendar"
+            app:materialIconColor="#5000"
+            android:scaleType="center"
+            android:layout_gravity="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:layout_gravity="bottom"
+            android:text="Select Date"
+            android:gravity="center"
+            android:textColor="#5000"
+            android:textSize="24sp"/>
+
+    </FrameLayout>
+
+</LinearLayout>
