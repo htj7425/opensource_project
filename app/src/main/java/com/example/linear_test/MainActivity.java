@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         Paint textPaint = new Paint();
         textPaint.setColor(Color.WHITE);
 
-        LinearPickerAdapter dateAdap = new DateAdapter(this, textPaint);
+        //LinearPickerAdapter dateAdap = new DateAdapter(this, textPaint);
         LinearPickerAdapter timeAdap = new TimeAdapter(this, textPaint);
         LinearPickerAdapter colorAdap = new ColorAdapter(this, textPaint);
         LinearPickerAdapter graColorAdap = new GradientColorAdapter(this, textPaint);
@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-        findViewById(R.id.ltp_date).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.ltp_date).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 LinearDatePickerDialog.Builder.with(MainActivity.this)
@@ -98,6 +98,6 @@ public class MainActivity extends AppCompatActivity {
                         .build()
                         .show();
             }
-        });
+        });*/
     }
 }
