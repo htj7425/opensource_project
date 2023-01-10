@@ -18,7 +18,7 @@ import com.example.linear_test.adapter.TimeAdapter;
 import com.example.linear_test.view.LinearPickerView;
 
 public class MainActivity extends AppCompatActivity {
-
+    boolean first_tutorial = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         final int backgroundDark = ResourcesCompat.getColor(getResources(), R.color.background_dark, getTheme());
         final int foregroundDark = ResourcesCompat.getColor(getResources(), R.color.foreground_dark, getTheme());
         final int colorAccent = ResourcesCompat.getColor(getResources(), R.color.colorAccent, getTheme());
+
+
 
         LinearPickerView v = new LinearPickerView(this);
         Paint textPaint = new Paint();
@@ -49,26 +51,50 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.ltp_time).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearTimePickerDialog dialog = LinearTimePickerDialog.Builder.with(MainActivity.this)
-                        .setDialogBackgroundColor(foregroundDark)
-                        .setPickerBackgroundColor(backgroundDark)
-                        .setLineColor(Color.argb(64, 255, 255, 255))
-                        .setTextColor(Color.WHITE)
-                        .setShowTutorial(true)
-                        .setTextBackgroundColor(Color.argb(16, 255, 255, 255))
-                        .setButtonCallback(new LinearTimePickerDialog.ButtonCallback() {
-                            @Override
-                            public void onPositive(DialogInterface dialog, int hour, int minutes) {
-                                Toast.makeText(MainActivity.this, "" + hour + ":" + minutes, Toast.LENGTH_SHORT).show();
-                            }
+                if(first_tutorial) {
+                    LinearTimePickerDialog dialog = LinearTimePickerDialog.Builder.with(MainActivity.this)
+                            .setDialogBackgroundColor(foregroundDark)
+                            .setPickerBackgroundColor(backgroundDark)
+                            .setLineColor(Color.argb(64, 255, 255, 255))
+                            .setTextColor(Color.WHITE)
+                            .setShowTutorial(true)
+                            .setTextBackgroundColor(Color.argb(16, 255, 255, 255))
+                            .setButtonCallback(new LinearTimePickerDialog.ButtonCallback() {
+                                @Override
+                                public void onPositive(DialogInterface dialog, int hour, int minutes) {
+                                    Toast.makeText(MainActivity.this, "" + hour + ":" + minutes, Toast.LENGTH_SHORT).show();
+                                }
 
-                            @Override
-                            public void onNegative(DialogInterface dialog) {
+                                @Override
+                                public void onNegative(DialogInterface dialog) {
 
-                            }
-                        })
-                        .build();
-                dialog.show();
+                                }
+                            })
+                            .build();
+                    dialog.show();
+                    first_tutorial = false;
+                }
+                else{
+                    LinearTimePickerDialog dialog = LinearTimePickerDialog.Builder.with(MainActivity.this)
+                            .setDialogBackgroundColor(foregroundDark)
+                            .setPickerBackgroundColor(backgroundDark)
+                            .setLineColor(Color.argb(64, 255, 255, 255))
+                            .setTextColor(Color.WHITE)
+                            .setTextBackgroundColor(Color.argb(16, 255, 255, 255))
+                            .setButtonCallback(new LinearTimePickerDialog.ButtonCallback() {
+                                @Override
+                                public void onPositive(DialogInterface dialog, int hour, int minutes) {
+                                    Toast.makeText(MainActivity.this, "" + hour + ":" + minutes, Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onNegative(DialogInterface dialog) {
+
+                                }
+                            })
+                            .build();
+                    dialog.show();
+                }
             }
         });
         /*findViewById(R.id.ltp_date).setOnClickListener(new View.OnClickListener() {
