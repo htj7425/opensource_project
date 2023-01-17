@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onNegative(DialogInterface dialog) {
-                                    stop_alarm(my_intent);
+
                                 }
                             })
                             .build();
@@ -166,7 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onNegative(DialogInterface dialog) {
-                                    stop_alarm(my_intent);
+
                                 }
                             })
                             .build();
