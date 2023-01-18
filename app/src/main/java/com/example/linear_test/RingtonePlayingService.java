@@ -54,11 +54,11 @@ public class RingtonePlayingService extends Service {
             mediaPlayer = MediaPlayer.create(this,R.raw.ouu);
             mediaPlayer.start();
             this.isRunning = true;
-/*
+
             Intent stateIntent = new Intent(getApplicationContext(), MainActivity.class);
             stateIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             stateIntent.putExtra("state", this.isRunning);
-            startActivity(stateIntent);*/
+            startActivity(stateIntent);
         }
         else if(getState.equals("alarm off")) {
             mediaPlayer.stop();

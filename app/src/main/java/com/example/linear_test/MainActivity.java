@@ -300,9 +300,16 @@ public class MainActivity extends AppCompatActivity {
         super.onNewIntent(intent);
     }
 
+    @SuppressLint("ResourceAsColor")
     private void processCommand(Intent intent){
         if(intent != null){
             this.state = intent.getBooleanExtra("state", false);
+            if(state){
+                this.stopAlarm.setTextColor(Color.parseColor("#FF0000"));
+            }
+            else{
+                this.stopAlarm.setTextColor(Color.parseColor("#FF000000"));
+            }
         }
     }
 }
