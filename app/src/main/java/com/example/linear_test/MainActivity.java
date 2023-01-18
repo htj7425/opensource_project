@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,9 +25,13 @@ import com.example.linear_test.dialog.LinearTimePickerDialog;
 import com.example.linear_test.view.LinearPickerView;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
     // 튜토리얼을 한번만 보여주도록 체크하는 변수
@@ -35,14 +40,17 @@ public class MainActivity extends AppCompatActivity {
     private TextView timeTextView;
     private ImageView delete_image;
     private TextView stopAlarm;
+    private TextView recommandTime;
     int h = 1;
     int m = 50;
-    boolean state = false;
+    boolean state;
     AlarmManager alarmManager;
     Context context;
     PendingIntent pendingIntent;
     int pendingFlag = 0;
     int index;
+    private Timer timerCall;
+    private int nCnt;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -74,6 +82,20 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
+
+        nCnt = 0;
+        recommandTime = findViewById(R.id.recommand_time);
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                recommandTime.setText("추천 시간 : " + getTime());
+            }
+        };
+
+        timerCall = new Timer();
+        timerCall.schedule(timerTask,0,5000);
+
         this.context = this;
 
         // 알람매니저 설정
@@ -97,6 +119,27 @@ public class MainActivity extends AppCompatActivity {
                 Random random = new Random();
                 random.setSeed(System.currentTimeMillis());
                 index = random.nextInt(2);
+                my_intent.putExtra("state","want state");
+                sendBroadcast(my_intent);
+
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (state && index == 0){
+                            timeTextView.setText("_ _ : _ _");
+                            pendingFlag--;
+                            Intent mIntent = new Intent(context, MissionActivity.class);
+                            startActivity(mIntent);
+                        }
+                        else if(state && index == 1){
+                            timeTextView.setText("_ _ : _ _");
+                            pendingFlag--;
+                            Intent mIntent = new Intent(context, MissionActivity2.class);
+                            startActivity(mIntent);
+                        }
+                    }
+                }, 3000); //딜레이 타임 조절
 
                 if (state && index == 0){
                     timeTextView.setText("_ _ : _ _");
@@ -206,6 +249,19 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
+    private String getTime() {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm");
+        String getTime = dateFormat.format(date);
+        String temp[] = (getTime.split(":"));
+        int h = Integer.parseInt(temp[0])+6;
+        int m = Integer.parseInt(temp[1]) + 34;
+        int am_pm_flag = h/12;
+        getTime = "" + ((h%12 == 0 ? 12 : h%12)+(m/60)) + " : " + (m%60) + (am_pm_flag == 0 ? " AM" : " PM");
+        return getTime;
+    }
+
     public void set_alarm(Calendar calendar, Intent my_intent, int h, int m){
         Toast.makeText(MainActivity.this, "" + h + ":" + m, Toast.LENGTH_SHORT).show();
         calendar.set(Calendar.HOUR_OF_DAY, h);
@@ -246,8 +302,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void processCommand(Intent intent){
         if(intent != null){
-            boolean state = intent.getBooleanExtra("state", false);
-            this.state = state;
+            this.state = intent.getBooleanExtra("state", false);
         }
     }
 }

@@ -54,11 +54,11 @@ public class RingtonePlayingService extends Service {
             mediaPlayer = MediaPlayer.create(this,R.raw.ouu);
             mediaPlayer.start();
             this.isRunning = true;
-
+/*
             Intent stateIntent = new Intent(getApplicationContext(), MainActivity.class);
             stateIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
             stateIntent.putExtra("state", this.isRunning);
-            startActivity(stateIntent);
+            startActivity(stateIntent);*/
         }
         else if(getState.equals("alarm off")) {
             mediaPlayer.stop();
@@ -74,9 +74,8 @@ public class RingtonePlayingService extends Service {
             startActivity(stateIntent);
         }
         else if(getState.equals("want state")){
-            Intent stateIntent = new Intent(this, MainActivity.class);
+            Intent stateIntent = new Intent(getApplicationContext(), MainActivity.class);
             stateIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
             stateIntent.putExtra("state", this.isRunning);
             startActivity(stateIntent);
         }
@@ -88,47 +87,9 @@ public class RingtonePlayingService extends Service {
             stateIntent.putExtra("state", this.isRunning);
             startActivity(stateIntent);
         }
-        /*
-        // 알람음 재생 X , 알람음 시작 클릭
-        if(!this.isRunning && startId == 4) {
-
-            mediaPlayer = MediaPlayer.create(this,R.raw.ouu);
-            mediaPlayer.start();
-
-            this.isRunning = true;
-            this.startId = 0;
-        }
-
-        // 알람음 재생 O , 알람음 종료 버튼 클릭
-        else if(this.isRunning && startId == 2) {
-
-            mediaPlayer.stop();
-            mediaPlayer.reset();
-            mediaPlayer.release();
-
-            this.isRunning = false;
-            this.startId = 0;
-        }
-
-        // 알람음 재생 X , 알람음 종료 버튼 클릭
-        else if(!this.isRunning && startId == 2) {
-
-            this.isRunning = false;
-            this.startId = 0;
-
-        }
-
-        // 알람음 재생 O , 알람음 시작 버튼 클릭
-        else if(this.isRunning && startId == 4){
-
-            this.isRunning = true;
-            this.startId = 1;
-        }
-
-        else {
-        }*/
         return START_NOT_STICKY;
     }
+
 
     @Override
     public void onDestroy() {
@@ -143,4 +104,5 @@ public class RingtonePlayingService extends Service {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
 }
